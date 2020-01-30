@@ -13,9 +13,11 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, ITest _test)
         {
             _logger = logger;
+            string s =  _test.F1();
         }
 
         public IActionResult Index()
