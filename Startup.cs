@@ -11,6 +11,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace MohammadpourAspNetCoreSaturdayMondayEvening
 {
+
+    //class Reza
+    //{
+    //}
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -24,6 +29,9 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAuthentication();
+            //services.AddTransient(typeof(Reza));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,12 +47,15 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {
