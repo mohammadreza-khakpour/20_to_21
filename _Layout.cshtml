@@ -476,7 +476,16 @@
 
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <div class="topbar__item">@User.Identity.Name</div>
+                                @inject UserManager<ApplicationUser> usermanager
+                                ApplicationUser user = await usermanager.FindByNameAsync(User.Identity.Name);
+                                <div class="topbar__item">  @($" {user.firstname} {user.lastname}: ")  </div>
+                                <div class="topbar__item">
+                                    <a asp-action="Logout" asp-controller="Account"> خروج </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a asp-action="RegisterLogin" asp-controller="Account">ورود</a>
                             }
                             <div class="topbar__item">
                                 <div class="topbar-dropdown">
@@ -1281,6 +1290,30 @@
         </footer>
         <!-- site__footer / end -->
     </div>
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="modal fade" id="divmodalShowMessage">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:orange">
+                        <h3>پیام سیستمی</h3>
+                    </div>
+                    <div class="modal-body">
+                        <label>@TempData["msg"]</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" data-dismiss="modal">بازگشت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+                $(divmodalShowMessage).modal();
+            })
+        </script>
+    }
     <!-- site / end -->
 </body>
 
