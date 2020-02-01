@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MohammadpourAspNetCoreSaturdayMondayEvening.Data;
 
 namespace MohammadpourAspNetCoreSaturdayMondayEvening.Migrations
 {
     [DbContext(typeof(DBMohammadpour))]
-    partial class DBMohammadpourModelSnapshot : ModelSnapshot
+    [Migration("20200120130622_DBMohammadpour2")]
+    partial class DBMohammadpour2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,51 +254,6 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("MohammadpourAspNetCoreSaturdayMondayEvening.Models.Purchasecart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("isPaid")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Purchasecarts");
-                });
-
-            modelBuilder.Entity("MohammadpourAspNetCoreSaturdayMondayEvening.Models.PurchasecartProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PurchasecartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("count")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("PurchasecartId");
-
-                    b.ToTable("PurchasecartProducts");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -344,28 +301,6 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Migrations
                     b.HasOne("MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MohammadpourAspNetCoreSaturdayMondayEvening.Models.Purchasecart", b =>
-                {
-                    b.HasOne("MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity.Data.ApplicationUser", "User")
-                        .WithMany("Purchasecarts")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("MohammadpourAspNetCoreSaturdayMondayEvening.Models.PurchasecartProduct", b =>
-                {
-                    b.HasOne("MohammadpourAspNetCoreSaturdayMondayEvening.Models.Product", "Product")
-                        .WithMany("PurchasecartProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MohammadpourAspNetCoreSaturdayMondayEvening.Models.Purchasecart", "Purchasecart")
-                        .WithMany("PurchasecartProducts")
-                        .HasForeignKey("PurchasecartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

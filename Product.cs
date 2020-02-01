@@ -11,6 +11,10 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Models
         public string name { get; set; }
         public int count { get; set; }
         public int price { get; set; }
+        public byte[] img { get; set; }
+        public byte[] imgThumbnail { get; set; }
+
+        public ICollection<PurchasecartProduct> PurchasecartProducts { get; set; }
 
     }
 }

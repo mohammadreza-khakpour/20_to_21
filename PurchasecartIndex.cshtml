@@ -1,0 +1,98 @@
+﻿@model List<PurchasecartProduct>
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <div class="cart block">
+        <div class="container">
+            <table class="cart__table cart-table">
+                <thead class="cart-table__head">
+                    <tr class="cart-table__row">
+                        <th class="cart-table__column cart-table__column--image">تصویر</th>
+                        <th class="cart-table__column cart-table__column--product">محصول</th>
+                        <th class="cart-table__column cart-table__column--price">قیمت</th>
+                        <th class="cart-table__column cart-table__column--quantity">تعداد</th>
+                        <th class="cart-table__column cart-table__column--total">جمع کل</th>
+                        <th class="cart-table__column cart-table__column--remove"></th>
+                    </tr>
+                </thead>
+                <tbody class="cart-table__body">
+                  @foreach (var item in Model)
+                  {
+                    <tr class="cart-table__row">
+                        <td class="cart-table__column cart-table__column--image">
+                            <a href=""><img src="@($"data:item/jpeg;base64,{Convert.ToBase64String(item.Product.imgThumbnail)}")" alt=""></a>
+                        </td>
+                        <td class="cart-table__column cart-table__column--product">
+                            <a href="" class="cart-table__product-name">@item.Product.name</a>
+                            <ul class="cart-table__options">
+                                @*<li>رنگ: زرد</li>
+                                <li>جنس: آلومینیوم</li>*@
+                            </ul>
+                        </td>
+                        <td class="cart-table__column cart-table__column--price" data-title="قیمت">@($"{item.Product.price:0,0}") تومان</td>
+                        <td class="cart-table__column cart-table__column--quantity" data-title="تعداد">
+                            <div class="input-number">
+                                <input class="form-control input-number__input" type="number" min="1" value="@item.count">
+                                <div class="input-number__add"></div>
+                                <div class="input-number__sub"></div>
+                            </div>
+                        </td>
+                        <td class="cart-table__column cart-table__column--total" data-title="جمع کل">@($"{(item.count * item.Product.price):0,0}") تومان</td>
+                        <td class="cart-table__column cart-table__column--remove">
+                            <button type="button" class="btn btn-light btn-sm btn-svg-icon">
+                                <svg width="12px" height="12px">
+                                    <use xlink:href="~/layout/images/sprite.svg#cross-12"></use>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                  }
+                </tbody>
+            </table>
+            <div class="cart__actions">
+                <form class="cart__coupon-form">
+                    <label for="input-coupon-code" class="sr-only">رمز عبور</label>
+                    <input type="text" class="form-control" id="input-coupon-code" placeholder="کد تخفیف">
+                    <button type="submit" class="btn btn-primary">اعمال کد تخفیف</button>
+                </form>
+                <div class="cart__buttons"><a href="index.html" class="btn btn-light">ادامه خرید</a> <a href="" class="btn btn-primary cart__update-button">به روز رسانی سبد</a></div>
+            </div>
+            <div class="row justify-content-end pt-5">
+                <div class="col-12 col-md-7 col-lg-6 col-xl-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">مجموع سبد</h3>
+                            <table class="cart__totals">
+                                <thead class="cart__totals-header">
+                                    <tr>
+                                        <th>جمع جزء</th>
+                                        <td>5,877,000 تومان</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="cart__totals-body">
+                                    <tr>
+                                        <th>حمل و نقل</th>
+                                        <td>
+                                            25,000 تومان
+                                            <div class="cart__calc-shipping"><a href="#">محاسبه هزینه</a></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>مالیات</th>
+                                        <td>0 تومان</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="cart__totals-footer">
+                                    <tr>
+                                        <th>جمع کل</th>
+                                        <td>5,902,000 تومان</td>
+                                    </tr>
+                                </tfoot>
+                            </table><a class="btn btn-primary btn-xl btn-block cart__checkout-button" href="checkout.html">پرداخت</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
