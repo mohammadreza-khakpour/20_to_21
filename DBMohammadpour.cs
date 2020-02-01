@@ -23,5 +23,7 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Purchasecart> Purchasecarts { get; set; }
+        public DbSet<PurchasecartProduct> PurchasecartProducts { get; set; }
     }
 }
