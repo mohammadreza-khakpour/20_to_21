@@ -19,9 +19,11 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity
             {
                 services.AddDbContext<DBMohammadpour>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("DBMohammadpourConnection")));
+                        context.Configuration.GetConnectionString("DBMohammadpourConnection"))
+                    );
 
-                services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<ApplicationUser>(options =>
+                options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<DBMohammadpour>();
 
                 services.Configure<IdentityOptions>(x =>
@@ -30,10 +32,10 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity
                     x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
 
                     x.Password.RequiredLength = 3;
-                    x.Password.RequireDigit= false;
-                    x.Password.RequireNonAlphanumeric= false; //symbol
-                    x.Password.RequireLowercase = false; 
-                    x.Password.RequireUppercase = false; 
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireNonAlphanumeric = false; //symbol
+                    x.Password.RequireLowercase = false;
+                    x.Password.RequireUppercase = false;
                 });
             });
         }
