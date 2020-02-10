@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace MohammadpourAspNetCoreSaturdayMondayEvening
 {
@@ -31,15 +32,22 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening
             services.AddControllersWithViews();
             services.AddAuthentication();
 
-            services.AddTransient<ITest, Test1>();
-            //services.AddTransient<ITest, Test2>();
-            //services.AddTransient<Test>();
-            
+            //services.AddTransient<ITest, Test1>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile($@"D:\MohammadpourLog_info.txt"
+                , minimumLevel: LogLevel.Information);
+            loggerFactory.AddFile($@"D:\MohammadpourLog_warning.txt"
+                , minimumLevel: LogLevel.Warning);
+            loggerFactory.AddFile($@"D:\MohammadpourLog_error.txt"
+                , minimumLevel: LogLevel.Error);
+            loggerFactory.AddFile($@"D:\MohammadpourLog_critical.txt"
+                , minimumLevel: LogLevel.Critical);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

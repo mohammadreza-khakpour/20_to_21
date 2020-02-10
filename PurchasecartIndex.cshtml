@@ -129,9 +129,10 @@
                     $(btn).parents('tr').find('td.cart-table__column--total').html(value.totalSumItem)
                 })
         })
+
         $('.cart__update-button').click(function (event) {
             event.preventDefault()
-            if (confirm('آیا کالا ها حذف شوند؟')) {
+            if (confirm('آیا کالا ها حذف شوند؟')==true) {
                 $.post('/Purchasecart/RemoveProductItems', { Ids: selectedIds }, function (value) {
                     if (value === true) {
                         $(':checked').parents('tr').remove();
@@ -142,7 +143,9 @@
                 return false;
             }
         })
+
         var selectedIds = []
+
         $(':checkbox').change(function () {
             var id = $(this).val()
             if ($(this).prop('checked')) {

@@ -33,6 +33,7 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
         }
         public async Task<IActionResult> Logout()
         {
+            //User.Identity.Name
             await signManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
