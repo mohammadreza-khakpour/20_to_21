@@ -21,10 +21,10 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
             db = _db;
             userManager = _userManager;
         }
-        
+
         public string ComputeTotalSum(int purchasecartId)
         {
-            var totalSum  =
+            var totalSum =
                 db.PurchasecartProducts.Where(x => x.PurchasecartId == purchasecartId)
                 .Include(x => x.Product).Sum(x => x.count * x.Product.price);
             return $"تومان {totalSum:0,0} ";
@@ -45,7 +45,14 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
 
         public IActionResult RemoveProductItems(List<int> Ids)
         {
-            var p = db.PurchasecartProducts.Where(x => Ids.Contains(x.Id));
+            //Task.Run(() =>
+            //{
+            //    var p = db.PurchasecartProducts.Where(x => Ids.Contains(x.Id));
+            //    db.RemoveRange(p);
+            //    db.SaveChanges();
+            //});
+            //IEnumerable<PurchasecartProduct> p = db.PurchasecartProducts.Where(x => Ids.IndexOf(x.Id)!=-1);
+            IEnumerable<PurchasecartProduct> p = db.PurchasecartProducts.Where(x => Ids.Contains(x.Id));
             db.RemoveRange(p);
             db.SaveChanges();
             return Json(true);
