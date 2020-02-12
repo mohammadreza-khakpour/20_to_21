@@ -96,7 +96,10 @@
                                     <td id="tdtotalsum">@ViewData["totalsum"]</td>
                                 </tr>
                             </tfoot>
-                        </table><a class="btn btn-primary btn-xl btn-block cart__checkout-button" href="checkout.html">پرداخت</a>
+                        </table>
+                        <a class="btn btn-primary btn-xl btn-block cart__checkout-button" asp-action="Index" 
+                                    asp-route-purchaseCartId="@ViewData["purschaseCartId"]" 
+                                    asp-controller="Payment"> پرداخت در بانک</a>
                     </div>
                 </div>
             </div>
