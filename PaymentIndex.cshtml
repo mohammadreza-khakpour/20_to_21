@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<script>
+    $(function () {
+        var counter = 1;
+        setInterval(() => {
+            $(hcounter).html(counter++)
+        }, 1000)
+        setTimeout(() => {
+            $(form1).submit();
+        }, 10000)
+    })
+</script>
+<h1 id="hcounter">0</h1>
+<form method="post" action="https://ikc.shaparak.ir/TPayment/Payment/Index" id="form1">
+    @*<form method="post" action="آدرس صفحه Ipg">*@
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>مقدار-ریال</label>
+                1000
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>توکن مشتری</label>
+                <input id="token" name="token" value="@ViewData["clientToken"]" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>شناسه پذیرنده</label>
+                <input id="merchantId" name="merchantId" value="@ViewData["merchantId"]" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="p1">شناسه پرداخت</label>
+                <input id="PaymentId" name="PaymentId" class="form-control" value="@ViewData["PaymentId"]" />@*random 4 digit*@
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success ben-block form-control">پرداخت</button>
+            </div>
+        </div>
+    </div>*@
+
+</form>

@@ -71,7 +71,7 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
                 .Include(x => x.Product).ToList();
 
             ViewData["totalsum"] = ComputeTotalSum(purchasecart.Id);
-
+            ViewData["purschaseCartId"] = purchasecart.Id;
             return View(purchaseproducts);
         }
 
