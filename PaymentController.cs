@@ -77,7 +77,7 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
 
             }
 
-            return View();
+            return View("ProductList","Product");
         }
 
     }

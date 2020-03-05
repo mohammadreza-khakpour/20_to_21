@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity.Data;
@@ -61,11 +62,13 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Controllers
             return View(db.Products.ToList());
         }
 
+        [Authorize(Policy = "adminpolicy")]
         public IActionResult Insert()
         {
             return View();
         }
 
+        [Authorize(Policy = "Adminpolicy")]
         public IActionResult InsertConfirm(ProductViewModel model)
         {
             var product = new Product

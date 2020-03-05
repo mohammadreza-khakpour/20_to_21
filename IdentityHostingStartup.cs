@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -24,6 +26,7 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity
 
                 services.AddDefaultIdentity<ApplicationUser>(options =>
                 options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<DBMohammadpour>();
 
                 services.Configure<IdentityOptions>(x =>
@@ -37,6 +40,35 @@ namespace MohammadpourAspNetCoreSaturdayMondayEvening.Areas.Identity
                     x.Password.RequireLowercase = false;
                     x.Password.RequireUppercase = false;
                 });
+
+
+                services.ConfigureApplicationCookie(x =>
+                {
+                    x.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToLogin = y =>
+                        {
+                            y.Response.Redirect("/Account/RegisterLogin");
+                            return Task.CompletedTask;
+                        },
+                        OnRedirectToAccessDenied = y =>
+                        {
+                            y.Response.Redirect("/Account/RegisterLogin");
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+
+                services.AddAuthorization(x =>
+                {
+                    x.AddPolicy("Adminpolicy", x => x.RequireRole("ادمین"));
+
+                    //x.AddPolicy("adminpolicy", x => x.RequireRole("ادمین").RequireRole("فروشنده")); AND
+                    
+                    //x.AddPolicy("adminpolicy", x => x.RequireRole("ادمین"));  //OR
+                    //x.AddPolicy("adminpolicy", x => x.RequireRole("فروشنده")); //OR
+                });
+
             });
         }
     }
